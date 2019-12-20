@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block head_title %}{{ instance.title}} | {{block.super}}{% endblock head_title %}
+
+
+{% block content %}
+<head>
+    <title>Space Clicker</title>
+    <style>
+body{
+	background-image:url("../static/img/plain.jpg");
+}
+
+h1{
+	display:block;
+	color: grey;
+	text-align: left;
+	font-size: 45px;
+}
+
+label{
+	font-size: 30px;
+	color:blue;
+}
+
+input{
+	border:1px solid black;
+	display:inline-block;
+	width:400px;
+	height:50px;
+	padding:10px;
+	margin-bottom: 15px;
+	background-color:orange;
+	color:blue;
+	font-size: 30px;
+}
+
+input:hover,input:active{
+	background-color:lightgreen;
+	color:black;
+}
+
+button{
+	font-size:30px;
+	color:black;
+	font-weight: bold;
+}
+p{
+	font-weight:bolder;
+	font-size:45px;
+	color:red;
+
+}
+a{
+	margin-left:10px;
+	text-decoration:none;
+	color:grey;
+	text-align:center;
+	font-size:60px;
+}
+
+a:hover,a:active{
+	text-decoration:none;
+}
+h4{
+	font-size:20px;
+	color:grey;
+	font-weight:bold;
+}
+</style>
+
+
+</head>
+
+
+<div class='col-sm-12 col-sm-offset-12'>
+<p><a href='/signout' class="btn btn-danger btn-lg text-capitalize" >Logout</a>  
+<a href='/upload' class="btn btn-success btn-lg" role="button">Upload</a>    </p>
+</div>
+
+<div class='col-sm-12 text-justified col-sm-offset-2'>
+    <h1><a href='/home'>Telegenic Express </a></h1>
+</div>
+
+
+    {% if instance.image %}
+<video width="1000" height="620" controls>
+  <source src='{{ instance.image.url }}' type="video/mp4">
+</video>
+{% endif %}
+<br>
+  <script type="text/javascript">
+    var clicks = 0;
+    var diclicks=0;
+    function onClick() {
+        clicks += 1;
+        document.getElementById("clicks").innerHTML = clicks;
+    };
+    function onDisClick() {
+        diclicks += 1;
+        document.getElementById("diclicks").innerHTML = diclicks;
+    };
+
+    </script>
+
+
+ 
+	
+
+
+
+<div class="container">
+<div class="row">
+
+<div class="col-sm-12"><h1>{{ title }}</h1></div>
+<!--<div class="col-sm-1">
+
+<button class="btn btn-primary btn-lg" onClick="onClick()">Like</button>
+<p id="clicks" style="font-size:20px">0</p>
+</div>
+<div class="col-sm-1">
+<button  class="btn btn-primary btn-lg" onClick="onDisClick()">Dislike</button>
+ <p id="diclicks" style="font-size:20px">0</p>
+ </div>
+ </div>-->
+ <div class="row">
+ <div class="col-sm-6"> 
+<p>Description:</p>
+<h4>something just like this</h4>
+ </div>
+ </div>
+
+ 
+<div class="row">
+<div class="col-sm-6">
+<div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="5"></div>
+</div>
+
+<div class='col-sm-6 col-sm-offset-8'>
+		<a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" class="btn btn-primary btn-lg" role="button">
+Share on Facebook
+</a><a href="https://twitter.com/home?status={{ share_string }}%100{{ request.build_absolute_uri }}" class="btn btn-primary btn-lg" role="button">Share on twitter</a></div>
+
+</div>
+</div>
+</div>
+
+  
+    
+
+
+
+
+{%endblock content %}

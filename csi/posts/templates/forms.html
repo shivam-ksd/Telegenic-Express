@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+
+
+
+{% block content %}
+<style>
+body{
+	background-image:url("../static/img/tele.jpg");
+}
+
+h1{
+	display:block;
+	color: black;
+	text-align: left;
+	font-size: 45px;
+	font-weight:bold;
+}
+
+label{
+	font-size: 30px;
+	color:black;
+}
+
+input{
+	border:1px solid black;
+	display:inline-block;
+	width:400px;
+	height:50px;
+	padding:10px;
+	background-color:grey;
+	color:blue;
+	font-size: 30px;
+}
+
+input:hover,input:active{
+	background-color:white;
+	color:black;
+}
+
+button{
+	margin-top:30px;
+	font-size:30px;
+	color:black;
+	font-weight: bold;
+	margin-left:10px;
+}
+p{
+	font-weight:bolder;
+	font-size:45px;
+	color:red;
+
+}
+a{
+	margin-left:10px;
+	text-decoration:none;
+	color:grey;
+	text-align:center;
+	font-size:30px;
+	margin-top: 15px;
+}
+
+a:hover,a:active{
+	text-decoration:none;
+}
+h2{
+	top:0px;
+	left:0px;
+	text-align:left;
+	color:black;
+	font-size:60px;
+}
+</style>
+
+<div class="col-sm-12 text-left"><i><u><h2>Telegenic Express</h2></u></i></div>
+
+<div class='col-sm-6 col-sm-offset-3'>
+
+
+<h1>{{ title }}</h1>
+
+<hr/>
+
+<form method='POST' action='' enctype='multipart/form-data'>{% csrf_token %}
+
+
+
+
+
+{{ form }}
+<button type='submit' class='btn btn-danger col-sm-6 btn-lg' value='{{ title }}' >Sign Up</button>
+</form>
+</div>
+<div class='col-sm-6 col-sm-offset-3'>
+    <p><a href='/signin'>Already have an account </p></h1>
+</div>
+{% endblock content %}

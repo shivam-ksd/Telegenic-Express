@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+<style>
+body{
+    background-image:url("../static/img/plain2.jpg");
+}
+
+h1{
+    display:block;
+    color: grey;
+    text-align: left;
+    font-size: 45px;
+}
+
+label{
+    font-size: 30px;
+    color:blue;
+}
+
+input{
+    border:1px solid black;
+    width:200px;
+    height:50px;
+    padding:10px;
+    margin-bottom: 15px;
+    background-color:white;
+    color:blue;
+    font-size: 30px;
+}
+input[id="search"]{
+
+    width:50px;
+    font-size: 20px;
+}
+
+input:hover,input:active{
+    background-color:lightgreen;
+    color:black;
+}
+
+
+button{
+    font-size:30px;
+    color:black;
+    font-weight: bold;
+    margin-left:10px;
+}
+p{
+    font-weight:bolder;
+    font-size:25px;
+    color:red;
+
+}
+a{
+    margin-left:10px;
+    text-decoration:none;
+    color:grey;
+    text-align:center;
+    font-size:25px;
+}
+
+#head{
+    font-size:45px;
+}
+
+a:hover,a:active{
+    text-decoration:none;
+}
+</style>
+
+<div class='col-sm-8 col-sm-offset-4'>
+    <h1><a href='/home' id="head">Telegenic Express </a></h1>
+</div>
+
+<div class='col-sm-12 col-sm-offset-12'>
+<p><a href='/signout' class="btn btn-warning btn-lg" role="button">Logout</a>  
+<a href='/upload' class="btn btn-success btn-lg" role="button">Upload</a>    </p>
+</div>
+
+<form method='GET' action=''>
+<input type='text' name='q' placeholder='Search posts' value='{{ request.GET.q }}'/>
+<button type="submit" class="btn btn-success">
+      <span class="glyphicon glyphicon-search"></span> Search
+    </button>
+</form>
+
+<div class="row">
+{% for obj in object_list %}
+
+
+<div class="col-sm-4 col-md-4">
+
+
+
+
+  
+    <div class="thumbnail">
+    {% if obj.image %}
+    <video width="320" height="240" controls>
+        <source  width="320" height="240" src='{{ obj.image.url }}' type="video/mp4">
+    </video>
+    {% endif %}
+
+     <!-- <script type="text/javascript">
+    var clicks = 0;
+    function Click() {
+        clicks += 1;
+        document.getElementById("views").innerHTML = clicks;
+    };
+
+
+    </script>
+    <div >
+    <p>Views:</p><p id="views" class="text-left">0</p>
+        
+    </div>
+      -->
+      <div class="caption">
+
+        <h3><a onClick="Click()" href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a> </h3>
+        <h4>{{ obj.timestamp|timesince }} ago</h4>
+        
+        
+      </div>
+  </div>
+</div>
+</hr>
+
+{% cycle "" "" "</div><div class='row'>" %}
+{% endfor %}
+</div>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if object_list.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ object_list.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+        </span>
+
+        {% if object_list.has_next %}
+            <a href="?page={{ object_list.next_page_number }}">next</a>
+            <a href="?page={{ object_list.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+{% endblock content %}
